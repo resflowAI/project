@@ -1,0 +1,19 @@
+.exportBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 6px;
+}
+
+.exportBtn :global(.anticon) {
+  color: #6b6f76;
+}
+
+.exportBtn:hover :global(.anticon) {
+  color: #0b5fff; /* subtle blue on hover */
+}
+
+.exportBtn:hover {
+  background: rgba(11, 95, 255, 0.06);
+  border-radius: 8px;
+}

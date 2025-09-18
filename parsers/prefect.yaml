@@ -1,0 +1,121 @@
+name: resflow
+prefect-version: 3.4.20
+
+common:
+  http_parser_workpool: &http_parser_workpool
+    name: default
+    job_variables:
+      image: "{{ build-image.image_name }}"
+      env: &envs
+        PROXY_HOST: "{{ $PROXY_HOST }}"
+        PROXY_USER: "{{ $PROXY_USER }}"
+        PROXY_PASSWORD: "{{ $PROXY_PASSWORD }}"
+        CLICKHOUSE_DSN: "{{ $CLICKHOUSE_DSN }}"
+      host_ipc: true
+      resources:
+        requests:
+          cpu: 500m
+          memory: 512Mi
+        limits:
+          cpu: 2000m
+          memory: 2048Mi
+
+  browser_parser_workpool: &browser_parser_workpool
+    name: default
+    job_variables:
+      image: "{{ build-image.image_name }}"
+      env: *envs
+      resources:
+        requests:
+          cpu: 500m
+          memory: 1024Mi
+        limits:
+          cpu: 2000m
+          memory: 4096Mi
+
+  schedules:
+    run_daily: &run_daily
+      cron: "0 4 * * *"
+      timezone: "Europe/Moscow"
+
+build:
+  - prefect.deployments.steps.run_shell_script:
+      id: get-commit-hash
+      script: git rev-parse --short HEAD
+      stream_output: false
+
+  - prefect_docker.deployments.steps.build_docker_image:
+      id: build-image
+      requires: prefect-docker>=0.4.0
+      image_name: "{{ $PREFECT_IMAGE_NAME }}"
+      tag: latest
+      dockerfile: ./parsers/dockerfile
+
+push:
+  - prefect_docker.deployments.steps.push_docker_image:
+      requires: prefect-docker=>0.4.0
+      image_name: "{{ build-image.image_name }}"
+      tag: "{{ build-image.tag }}"
+
+pull:
+  - prefect.deployments.steps.set_working_directory:
+      directory: /usr/src/app
+
+deployments:
+  - name: banki.ru
+    version: "{{ get-commit-hash.stdout }}"
+    entrypoint: "parsers/flows/banki.py:parse_banki_ru"
+    work_pool: *http_parser_workpool
+    schedule: *run_daily
+    tags:
+      - scrapper
+      - bs4
+
+  - name: brobank.ru
+    version: "{{ get-commit-hash.stdout }}"
+    entrypoint: "parsers/flows/brobank.py:parse_brobank_ru"
+    work_pool: *http_parser_workpool
+    schedule: *run_daily
+    tags:
+      - scrapper
+      - bs4
+
+  - name: topbanki.ru
+    version: "{{ get-commit-hash.stdout }}"
+    entrypoint: "parsers/flows/topbanki.py:parse_topbanki_ru"
+    work_pool: *http_parser_workpool
+    schedule: *run_daily
+    tags:
+      - scrapper
+      - bs4
+      - playwright
+
+  - name: mainfin.ru
+    version: "{{ get-commit-hash.stdout }}"
+    entrypoint: "parsers/flows/mainfin.py:parse_mainfin_ru"
+    work_pool: *browser_parser_workpool
+    schedule: *run_daily
+    tags:
+      - scrapper
+      - bs4
+      - playwright
+
+  - name: sravni.ru
+    version: "{{ get-commit-hash.stdout }}"
+    entrypoint: "parsers/flows/sravni.py:parse_sravni_ru"
+    work_pool: *browser_parser_workpool
+    schedule: *run_daily
+    tags:
+      - scrapper
+      - bs4
+      - playwright
+
+  - name: ru.myfin.by
+    version: "{{ get-commit-hash.stdout }}"
+    entrypoint: "parsers/flows/myfin.py:parse_ru_myfin_by"
+    work_pool: *browser_parser_workpool
+    schedule: *run_daily
+    tags:
+      - scrapper
+      - bs4
+      - playwright

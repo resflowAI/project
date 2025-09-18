@@ -1,0 +1,49 @@
+repositories:
+  - name: qdrant
+    url: https://qdrant.github.io/qdrant-helm
+
+  - name: oauth2-proxy
+    url: https://oauth2-proxy.github.io/manifests
+
+  - name: prefect
+    url: https://prefecthq.github.io/prefect-helm
+
+releases:
+  - name: qdrant
+    namespace: qdrant
+    chart: qdrant/qdrant
+    values:
+      - qdrant.yaml
+
+  - name: clickhouse
+    namespace: clickhouse
+    chart: oci://registry-1.docker.io/bitnamicharts/clickhouse
+    version: 9.4.4
+    values:
+      - clickhouse.yaml
+
+  - name: rabbitmq-cluster-operator
+    namespace: rabbitmq-system
+    chart: oci://registry-1.docker.io/bitnamicharts/rabbitmq-cluster-operator
+    version: 4.4.34
+
+  - name: oauth2-proxy
+    namespace: oauth2-proxy
+    chart: oauth2-proxy/oauth2-proxy
+    values:
+      - oauth2-proxy.yaml
+
+  - name: prefect-server
+    namespace: prefect
+    chart: prefect/prefect-server
+    values:
+      - prefect-server.yaml
+
+  - name: prefect-worker
+    namespace: prefect
+    chart: prefect/prefect-worker
+    values:
+      - prefect-worker.yaml
+    set:
+      - name: worker.config.baseJobTemplate.configuration
+        file: prefect-job-template.json

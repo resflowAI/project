@@ -1,0 +1,53 @@
+---
+- name: Setup microk8s on nodes
+  hosts: k8s
+  become: yes
+
+  tasks:
+    - name: install snapd
+      apt:
+        name: snapd
+        state: present
+        update_cache: true
+
+    - name: install microk8s
+      community.general.snap:
+        name: microk8s
+        classic: true
+        channel: "1.33"
+
+    - name: add user to microk8s group
+      user:
+        name: "{{ ansible_user }}"
+        groups: microk8s
+        append: yes
+
+    - name: add .kube to microk8s group
+      file:
+        path: "~{{ ansible_user }}/.kube"
+        state: directory
+        mode: '0700'
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+
+
+    - name: wait microk8s for ready
+      shell: microk8s status --wait-ready
+
+    - name: enable microk8s addons
+      shell: "microk8s enable {{ item }}"
+      loop:
+        - dns
+        - hostpath-storage
+        - cert-manager
+        - ingress
+
+    - name: write /var/snap/microk8s/current/certs/csr.conf.template
+      copy:
+        src: ./csr.conf.template
+        dest: /var/snap/microk8s/current/certs/csr.conf.template
+      when: refresh_crts is defined
+
+    - name: refresh microk8s certs
+      shell: microk8s refresh-certs --cert server.crt
+      when: refresh_crts is defined

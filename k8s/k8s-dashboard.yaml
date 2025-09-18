@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-dashboard
+  namespace: kube-system
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: public
+  tls:
+    - secretName: k8s.resflow.ru-tls
+      hosts:
+        - k8s.resflow.ru
+  rules:
+  - host: k8s.resflow.ru
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kubernetes-dashboard
+            port:
+              number: 8443

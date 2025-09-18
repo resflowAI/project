@@ -1,0 +1,31 @@
+name: Setup kubectl
+description: Downloads and installs stable kubectl
+
+inputs:
+  secret:
+    description: secret name
+    required: true
+  jsonpath:
+    description: jsonpath expression
+    required: true
+  namespace:
+    description: k8s namespace
+    required: false
+    default: "default"
+
+outputs:
+  value:
+    description: value of secret
+    value: ${{ steps.retrieve.outputs.secret-value }}
+
+runs:
+  using: composite
+  steps:
+    - name: Retrieve deployment secrets
+      id: retrieve
+      shell: bash
+      run: |
+        secret_value=$(kubectl get secret -n ${{ inputs.namespace }} ${{ inputs.secret }} -o jsonpath="${{ inputs.jsonpath }}" | base64 -d)
+        echo "::add-mask::$secret_value"
+        echo "secret-value=$secret_value" >> "$GITHUB_OUTPUT"
+

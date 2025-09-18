@@ -1,0 +1,9 @@
+worker:
+  livenessProbe:
+    enabled: true
+  apiConfig: selfHostedServer
+  config:
+    workPool: default
+  revisionHistoryLimit: 1
+  selfHostedServerApiConfig:
+    apiUrl: http://prefect-server.prefect.svc.cluster.local:4200/api

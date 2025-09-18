@@ -1,0 +1,111 @@
+/* ui.module.scss */
+
+/* ...твои существующие стили... */
+
+.drawerRoot {
+  // 👈 локальный якорь для всех оверрайдов AntD Drawer
+
+  /* Корпус Drawer */
+  :global(.ant-drawer-content) {
+    border-radius: 12px 0 0 12px;
+    overflow: hidden;
+  }
+  :global(.ant-drawer-header) {
+    padding: 14px 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  :global(.ant-drawer-title) {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  :global(.ant-drawer-body) {
+    padding: 16px 16px 24px;
+  }
+  :global(.ant-divider) {
+    margin: 16px 0;
+  }
+
+  /* Радио-кнопки (пол) — сегменты */
+  :global(.ant-radio-group-solid) {
+    .ant-radio-button-wrapper {
+      border-radius: 999px !important;
+      margin-right: 8px;
+      padding: 0 12px;
+      height: 32px;
+      line-height: 30px;
+      border: 1px solid #eaeaea;
+
+      &:hover {
+        color: #1f66b3;
+        border-color: #cfe3ff;
+        background: #f6faff;
+      }
+    }
+    .ant-radio-button-wrapper-checked {
+      background: #eaf3ff !important;
+      color: #1f66b3 !important;
+      border-color: #cfe3ff !important;
+      box-shadow: none !important;
+    }
+  }
+
+  /* Рейтинг */
+  :global(.ant-rate) {
+    font-size: 18px;
+    gap: 2px;
+  }
+
+  /* Select (канал трафика) по умолчанию на 100% */
+  :global(.ant-select) {
+    width: 100%;
+  }
+  :global(.ant-select-multiple .ant-select-selector) {
+    min-height: 36px;
+    border-radius: 8px;
+  }
+  :global(.ant-select-multiple .ant-select-selection-item) {
+    border-radius: 999px;
+    background: #f5f7fa;
+  }
+
+  /* Узкие экраны */
+  @media (max-width: 480px) {
+    :global(.ant-drawer-body) {
+      padding: 12px 12px 20px;
+    }
+  }
+}
+
+/* Локальные утилити-классы, как и раньше */
+.drawerSection {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.drawerLabel {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+.hint {
+  font-size: 12px;
+  color: #b1b1b1;
+}
+
+/* (опционально) пилюльный мультиселект, если даёшь класс на Select */
+.trafficSelect {
+  :global(.ant-select-selector) {
+    border-radius: 999px !important;
+    background: #f2f8ff !important;
+    border: none !important;
+    padding: 4px 10px !important;
+  }
+  :global(.ant-select-selection-item) {
+    background: transparent !important;
+  }
+}
+
+.drawerFooter {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+}

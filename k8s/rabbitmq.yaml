@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rabbitmq
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: rabbitmq
+  namespace: rabbitmq
+spec:
+  replicas: 1
+  image: rabbitmq:3.13-management
+  service:
+    type: ClusterIP
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 1000m
+      memory: 4096Mi
+  persistence:
+    storage: 5Gi
+  rabbitmq:
+    additionalConfig: |
+      management.oauth_enabled = false
+      management.disable_basic_auth = false
+    advancedConfig: |
+      [
+        {rabbit, [
+              {default_consumer_prefetch, {false,10}}
+            ]
+        }
+      ].
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-amqp
+  namespace: rabbitmq
+spec:
+  selector:
+    app.kubernetes.io/name: rabbitmq
+  ports:
+    - protocol: TCP
+      port: 5672
+      targetPort: 5672
+      nodePort: 31212
+  type: NodePort
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rabbitmq
+  namespace: rabbitmq
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: public
+  tls:
+    - secretName: rabbitmq.resflow.ru-tls
+      hosts:
+        - rabbitmq.resflow.ru
+  rules:
+  - host: rabbitmq.resflow.ru
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: rabbitmq
+            port:
+              name: management

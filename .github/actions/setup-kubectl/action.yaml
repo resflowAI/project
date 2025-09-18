@@ -1,0 +1,21 @@
+name: Setup kubectl
+description: Downloads and installs stable kubectl
+
+inputs:
+  kubeconfig:
+    description: Base64 .kube/config file's content
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - run: |
+        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+      shell: bash
+    - if: ${{ inputs.kubeconfig != null }}
+      run: |
+        mkdir -p ~/.kube && echo $KUBECONFIG_CONTENTS | base64 -d > ~/.kube/config
+      env:
+        KUBECONFIG_CONTENTS: ${{ inputs.kubeconfig }}
+      shell: bash

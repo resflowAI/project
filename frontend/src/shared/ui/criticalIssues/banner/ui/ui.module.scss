@@ -1,0 +1,69 @@
+/* src/entities/critical-block/ui/ui.module.scss */
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #fff;
+
+  font-size: 14px;
+  line-height: 1.4;
+  color: #1f1f1f;
+
+  /* текст, если длинный → ограничиваем строками */
+  .preview {
+    flex: 1;
+    color: #2f2f2f;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--lines, 2); // по умолчанию 2 строки
+    text-overflow: ellipsis;
+    margin: 0 12px;
+  }
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+
+  .icon {
+    font-size: 18px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .title {
+    font-weight: 600;
+    font-size: 15px;
+    color: #111a2c;
+    white-space: nowrap;
+  }
+}
+
+.right {
+  flex-shrink: 0;
+
+  .cta {
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 4px 12px;
+    background: #f5f7fa;
+    border: none;
+
+    &:hover {
+      background: #ebf0f5;
+    }
+  }
+}

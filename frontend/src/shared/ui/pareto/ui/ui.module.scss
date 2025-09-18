@@ -1,0 +1,42 @@
+.wrap {
+  width: 100%;
+}
+.ant-card-body {
+  width: 100%;
+}
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+
+  .cardHeader {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    text-align: left;
+
+    padding: 16px 16px 0;
+
+    .title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .bullets {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+      color: #595959;
+
+      li {
+        list-style: disc;
+      }
+    }
+  }
+
+  .chart {
+    padding: 8px 12px 12px;
+    height: var(--pareto-h, 360px);
+  }
+}

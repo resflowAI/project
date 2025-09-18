@@ -1,0 +1,36 @@
+FROM node:20.14.0-bookworm AS build
+
+WORKDIR /opt/app
+
+COPY frontend/package.json ./
+RUN corepack enable
+
+ENV COREPACK_INTEGRITY_KEYS=0
+COPY frontend/pnpm-lock.yaml frontend/.npmrc ./
+RUN pnpm i --frozen-lockfile
+
+COPY frontend .
+RUN pnpm run build
+
+FROM node:20.14.0-bookworm
+
+WORKDIR /opt/app
+
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# COPY --from=build /opt/app/public ./public
+
+COPY --from=build --chown=nextjs:nodejs /opt/app/.next/standalone ./
+COPY --from=build --chown=nextjs:nodejs /opt/app/.next/static ./.next/static
+
+USER nextjs
+
+ENV HOSTNAME="0.0.0.0"
+ENV PORT=8000
+EXPOSE 8000
+
+CMD ["node", "server.js"]

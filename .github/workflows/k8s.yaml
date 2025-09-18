@@ -1,0 +1,23 @@
+name: Apply K8S Manifests
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - k8s/**
+      - .github/workflows/k8s.yaml
+
+jobs:
+  apply-manifests:
+    name: Apply manifests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-kubectl
+        with:
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+      - run: |
+          kubectl apply -f "k8s/**.yaml"

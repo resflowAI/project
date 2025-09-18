@@ -1,0 +1,22 @@
+FROM python:3.12-bookworm AS base
+
+ENV PYTHONUNBUFFERED=1
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PIP_ROOT_USER_ACTION=ignore
+
+WORKDIR /usr/src/app
+
+RUN pip install playwright==1.55.0 && \
+    playwright install chromium --with-deps
+
+RUN apt-get update && \
+    apt-get install -y tini htop wget
+
+COPY parsers/requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY parsers/ ./parsers
+
+ENV PYTHONPATH=/usr/src/app
+
+ENTRYPOINT [ "/usr/bin/tini", "--" ]

@@ -1,0 +1,29 @@
+.wrap {
+  background: #fff;
+  border-radius: 12px;
+  width: 100%;
+  overflow: hidden; // градиент не вылезет
+}
+
+.header {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 18px;
+  color: #1f1f1f;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.chartBox {
+  padding: 8px; // немного «воздуха» вокруг чарта
+}

@@ -1,0 +1,115 @@
+.banner {
+  --accent: #0057b6;
+  --lines: 2;
+
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  align-items: start; /* важный момент: чтобы блок мог стать выше из-за переноса */
+  gap: 12px;
+
+  background: #fff;
+  border: 1px solid rgba(0, 87, 182, 0.15);
+  box-shadow: 0 6px 24px rgba(10, 31, 68, 0.06);
+  border-radius: 12px;
+  padding: 12px 12px;
+
+  /* резерв высоты под N строк preview */
+  min-height: calc(var(--lines) * 1.45em + 24px);
+}
+
+.left {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.icon {
+  font-size: 18px;
+}
+.title {
+  font-weight: 700;
+  font-size: 16px;
+  color: #111a2c;
+}
+
+.preview {
+  color: #262626;
+  font-size: 14px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  /* показываем до N строк и ставим многоточие, если больше */
+  display: -webkit-box;
+  -webkit-line-clamp: var(--lines);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+}
+.cta {
+  background: #f5f7fb;
+  border-color: transparent;
+  border-radius: 10px;
+  height: 36px;
+  padding: 0 16px;
+  font-weight: 600;
+  &:hover {
+    background: #eef3fb;
+  }
+}
+
+/* ===== Modal ===== */
+.modalTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.list {
+  display: grid;
+  gap: 12px;
+}
+
+.item {
+  background: #f5f7fb;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.itemHeader {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.aspect {
+  margin: 0;
+  font-weight: 700;
+  font-size: 15px;
+  color: #1f1f1f;
+}
+
+.badges {
+  display: inline-flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.desc {
+  margin: 0;
+  color: #333;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+.meta {
+  margin-top: 10px;
+  color: #8c8c8c;
+  font-size: 12px;
+  text-align: right;
+}

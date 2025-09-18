@@ -1,0 +1,67 @@
+.card {
+  width: 100%;
+  border-radius: 12px;
+
+  // Убираем бордер у заголовка
+  :global(.ant-card-head-title) {
+    border-bottom: none !important;
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  // Убираем padding у body, чтобы чарт влезал
+  :global(.ant-card-body) {
+    padding: 24px !important;
+    overflow: visible !important;
+  }
+}
+
+.topLabel {
+  fill: #0057b6; /* Gazprom Blue */
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.tooltip {
+  background: #1f2430;
+  color: #fff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.tTitle {
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-size: 18px;
+}
+
+.tRow {
+  display: grid;
+  grid-template-columns: 10px auto max-content;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.4;
+}
+
+.value {
+  font-weight: 700;
+}
+
+.tSep {
+  height: 8px;
+}
+
+.delta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.deltaArrow {
+  font-size: 14px;
+  transform: translateY(1px);
+}

@@ -1,0 +1,42 @@
+ingress:
+  enabled: true
+  ingressClassName: public
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/proxy-body-size: 128m
+  hosts:
+    - host: qdrant.resflow.ru
+      paths:
+        - path: /
+          pathType: Prefix
+          servicePort: 6333
+  tls:
+    - secretName: qdrant.resflow.ru-tls
+      hosts:
+        - qdrant.resflow.ru
+
+startupProbe:
+  enabled: true
+
+livenessProbe:
+  enabled: true
+
+readinessProbe:
+  enabled: true
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    cpu: 1000m
+    memory: 2048Mi
+
+persistence:
+  size: 10Gi
+
+apiKey: true
+
+config:
+  cluster:
+    enabled: false

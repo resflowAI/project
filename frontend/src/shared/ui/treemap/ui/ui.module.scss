@@ -1,0 +1,17 @@
+.wrap {
+  width: 100%;
+  padding: 16px;
+  background-color: #fff;
+  .h6 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+.container {
+  width: 100%;
+  height: var(--treemap-h, 500px);
+  position: relative;
+}
+
+/* на будущее: подсказки/оверлеи и т.п. */

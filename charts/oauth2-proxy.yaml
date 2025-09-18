@@ -1,0 +1,32 @@
+fullnameOverride: oauth2-proxy
+
+revisionHistoryLimit: 1
+
+ingress:
+  enabled: true
+  className: public
+  path: /oauth2
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  hosts:
+    - oauth2.resflow.ru
+  tls:
+    - hosts:
+        - oauth2.resflow.ru
+      secretName: oauth2.resflow.ru-tls
+
+config:
+  existingSecret: oauth2-proxy-secrets
+
+extraArgs:
+  provider: github
+  scope: "user:email read:org"
+  github-org: "resflowAI"
+  email-domain: "*"
+  cookie-secure: "true"
+  cookie-domain: ".resflow.ru"
+  whitelist-domain: ".resflow.ru"
+  redirect-url: https://oauth2.resflow.ru/oauth2/callback
+  upstream: file:///dev/null
+  prompt: "true"
+  reverse-proxy: "true"

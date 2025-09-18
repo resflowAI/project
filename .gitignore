@@ -1,0 +1,9 @@
+**/*.DS_Store
+
+kubeconfig
+/api/venv_file/
+**/*.idea/
+.env*
+**/__pycache__
+
+/parsers/venv/

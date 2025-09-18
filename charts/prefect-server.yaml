@@ -1,0 +1,35 @@
+ingress:
+  enabled: true
+  className: public
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/auth-url: https://oauth2.resflow.ru/oauth2/auth
+    nginx.ingress.kubernetes.io/auth-signin: https://oauth2.resflow.ru/oauth2/start?rd=$scheme://$best_http_host$request_uri
+  host:
+    hostname: prefect.resflow.ru
+    path: /
+    pathType: Prefix
+  extraTls:
+    - secretName: prefect.resflow.ru-tls
+      hosts:
+        - prefect.resflow.ru
+
+server:
+  livenessProbe:
+    enabled: true
+  uiConfig:
+    prefectUiApiUrl: https://prefect.resflow.ru/api
+  revisionHistoryLimit: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 1024Mi
+
+postgresql:
+  enabled: false
+
+sqlite:
+  enabled: true

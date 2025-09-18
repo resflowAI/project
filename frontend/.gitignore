@@ -1,0 +1,19 @@
+# Node / pnpm
+node_modules
+.pnpm-store
+.vscode
+# Next
+.next
+out
+.next-static
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+
+tsconfig.tsbuildinfo

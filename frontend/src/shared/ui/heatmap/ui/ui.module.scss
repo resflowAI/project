@@ -1,0 +1,117 @@
+.heatmap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 16px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: #111827;
+}
+.titleHelp {
+  font-size: 16px;
+  color: #8c8c8c;
+  cursor: help;
+  transition: color 0.15s ease;
+}
+.titleHelp:hover {
+  color: #262626;
+}
+
+/* сетка осей: слева Y, справа X(верх) + график(низ) */
+.axes {
+  display: grid;
+  grid-template-columns: minmax(160px, 240px) 1fr;
+  grid-template-rows: auto 1fr;
+  column-gap: 12px;
+  row-gap: 8px;
+  align-items: start;
+}
+.corner {
+  height: 0;
+}
+
+/* верхняя ось X — БЕЗ скроллбаров */
+.xHeader {
+  overflow: hidden; /* важно: не показываем полосу сверху */
+}
+.xTicks {
+  display: grid;
+  align-items: start;
+  will-change: transform; /* для плавного translateX при синхронизации */
+}
+.xTick {
+  text-align: center;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.1;
+  font-size: 11px;
+  color: #4b5563;
+}
+
+/* левая ось Y */
+.yTicks {
+  display: grid;
+  font-size: 12px;
+  color: #4b5563;
+}
+.yTick {
+  display: flex;
+  align-items: center;
+}
+
+/* нижний ЕДИНСТВЕННЫЙ видимый скролл */
+.chartScroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #c7c9d0 transparent;
+}
+/* WebKit */
+.chartScroll::-webkit-scrollbar {
+  height: 6px;
+}
+.chartScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chartScroll::-webkit-scrollbar-thumb {
+  background: #c7c9d0;
+  border-radius: 999px;
+}
+.chartScroll::-webkit-scrollbar-thumb:hover {
+  background: #aeb1b9;
+}
+
+.svgBlock {
+  display: block;
+}
+
+/* легенда */
+.legend {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.legendBar {
+  height: 8px;
+  border-radius: 999px;
+  width: 100%;
+}
+.legendLabels {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 12px;
+  color: #6b7280;
+}

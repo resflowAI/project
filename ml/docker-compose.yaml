@@ -1,0 +1,20 @@
+services:
+  ml:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      AMQP_DSN: ${AMQP_DSN}
+      QDRANT_HOST: ${QDRANT_HOST}
+      QDRANT_API_KEY: ${QDRANT_API_KEY}
+    gpus: all
+    ports:
+      - 8881:8001
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    volumes:
+      - /root/resflow/ml/bin:/app/bin

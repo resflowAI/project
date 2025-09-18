@@ -1,0 +1,109 @@
+.card {
+  width: 100%; /* занимает всю ширину родительского layout-контейнера */
+  max-width: 100%; /* перестраховка */
+  margin: 0; /* убираем автоцентрирование */
+
+  :global(.ant-card-body) {
+    padding: 16px;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 18px !important;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 13px;
+}
+
+.list {
+  display: grid;
+  gap: 12px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 12px;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    .name {
+      margin-bottom: 6px;
+    }
+  }
+}
+
+.name {
+  font-weight: 500;
+}
+
+.barWrap {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.bar {
+  position: relative;
+  display: flex;
+  height: 28px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eef1f4;
+}
+
+.segment {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.segLabel {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+  user-select: none;
+  pointer-events: none;
+
+  &.dark {
+    color: #2a2f36;
+    text-shadow: none;
+  }
+}
+
+.total {
+  color: #98a2b3;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.footer {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 14px;
+}
+
+.deltaUp {
+  color: #1a9f56;
+  font-weight: 700;
+}
+
+.deltaDown {
+  color: #e25555;
+  font-weight: 700;
+}

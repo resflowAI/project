@@ -1,0 +1,24 @@
+:root {
+  --brand-primary: #0057b6; /* Gazprom Blue */
+  --brand-azure: #0a6ed1; /* светлее для hover/линий */
+  --brand-violet: #5960ea; /* поддерживающий градиент */
+
+  /* Фон приложения под «белые карточки» */
+  --card-bg: #ffffff;
+  --text-primary: #111a2c;
+  --text-secondary: #7d7f88;
+  --border-subtle: #e9edf3;
+}
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--brand-primary);
+}

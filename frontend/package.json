@@ -1,0 +1,60 @@
+{
+  "name": "lct_gazprom",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 8080",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "prepare": "husky",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "lint:fix": "eslint . --fix --max-warnings=0"
+  },
+  "dependencies": {
+    "@ant-design/icons": "5",
+    "@ant-design/nextjs-registry": "1",
+    "antd": "5",
+    "axios": "1.12.2",
+    "d3-cloud": "1.2.7",
+    "dayjs": "1",
+    "next": "14.2.32",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-wordcloud": "1.2.7",
+    "recharts": "3.2.1",
+    "swr": "2.3.6",
+    "zustand": "5.0.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.17",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "8.44.0",
+    "@typescript-eslint/parser": "8.44.0",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.32",
+    "eslint-config-prettier": "9.1.0",
+    "husky": "9.1.6",
+    "lint-staged": "15.2.9",
+    "prettier": "3.3.3",
+    "sass": "1.77.8",
+    "typescript": "^5.5.4"
+  },
+  "packageManager": "pnpm@8.15.9",
+  "engines": {
+    "node": ">=20.14.0",
+    "pnpm": "8.x"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx,js,jsx}": [
+      "prettier --write",
+      "eslint --fix --max-warnings=0"
+    ],
+    "**/*.{css,scss,md,json,yml,yaml}": [
+      "prettier --write"
+    ]
+  }
+}

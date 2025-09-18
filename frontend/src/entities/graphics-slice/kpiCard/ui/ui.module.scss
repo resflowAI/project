@@ -1,0 +1,118 @@
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(10, 31, 68, 0.04);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 180px; /* не даём карточке схлопнуться */
+  width: 100%;
+
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .title {
+    color: #1f1f1f;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .actions {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    color: #bfbfbf;
+    &:hover {
+      background: #f5f5f5;
+      color: #8c8c8c;
+    }
+  }
+}
+
+.valueRow {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+
+  .value {
+    color: #1f1f1f;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .unit {
+    color: #8c8c8c;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .delta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 600;
+
+    &.up {
+      color: #3bb44a;
+    }
+    &.down {
+      color: #d4380d;
+    }
+    &.flat {
+      color: #8c8c8c;
+    }
+
+    .arrow {
+      font-size: 14px;
+      transform: translateY(1px);
+    }
+  }
+}
+
+.chart {
+  margin-top: 4px;
+  margin-left: -6px;
+  margin-right: -6px;
+  height: 40px; // график стал компактнее
+}
+
+/* src/entities/kpi/ui/KpiCard/ui.module.scss */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(10, 31, 68, 0.04);
+  padding: 12px 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 180px;
+  width: 100%;
+  overflow: visible; /* чтобы tooltip не резался */
+  min-height: 80px; /* ← резерв общей высоты */
+}
+
+.header {
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.valueRow {
+  min-height: 32px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.chart {
+  height: 40px;
+  margin: 4px -6px 0;
+} /* стабильная высота спарклайна */

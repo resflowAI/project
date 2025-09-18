@@ -1,0 +1,58 @@
+/* Layout tweaks for ThemeSearchBlock */
+.themeSearchCard {
+  margin-bottom: 16px;
+}
+
+.controlsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.searchInput {
+  flex: 1 1 280px;
+  min-width: 220px;
+}
+
+.controlsButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.kpiRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.chartsGrid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.chartCell {
+  min-height: 340px;
+  display: flex;
+}
+
+.chartCell > :global(*) {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.chartCellWide {
+  grid-column: 1 / -1;
+}

@@ -1,0 +1,54 @@
+/* ===== Modal ===== */
+.modalTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.list {
+  display: grid;
+  gap: 12px;
+}
+
+.item {
+  background: #f5f7fb;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.itemHeader {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.aspect {
+  margin: 0;
+  font-weight: 700;
+  font-size: 15px;
+  color: #1f1f1f;
+}
+
+.badges {
+  display: inline-flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.desc {
+  margin: 0;
+  color: #333;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+.meta {
+  margin-top: 10px;
+  color: #8c8c8c;
+  font-size: 12px;
+  text-align: right;
+}

@@ -1,0 +1,63 @@
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+/* KPI-панель */
+.kpis {
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr 0.5fr 2fr 2fr;
+  gap: 12px;
+}
+
+/* 2-я строка — таймлайны */
+.timesRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+
+  @media (max-width: 1280px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 3-я строка — кластеры + 2 линии */
+.clusterRow {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: stretch;
+
+  @media (max-width: 1280px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.clusterLeft {
+  min-width: 0;
+}
+.clusterRight {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+  min-width: 0;
+}
+.clusterRight :global(.ant-card-head) {
+  padding: 10px 14px;
+}
+.clusterRight :global(.ant-card-body) {
+  padding: 0;
+}
+
+/* 4-я строка — два блока (50/50) */
+.issuesRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  @media (max-width: 1280px) {
+    grid-template-columns: 1fr;
+  }
+}

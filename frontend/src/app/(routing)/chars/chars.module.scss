@@ -1,0 +1,169 @@
+/* app/(dashboard)/chars/chars.module.scss */
+
+.grid {
+  /* базовые переменные компоновки */
+  --gap: 16px;
+  --gap-sm: 12px;
+  --col-min: 200px;
+  display: grid;
+  gap: var(--gap);
+  > section:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* KPI — до 4 колонок, авто-перенос */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(var(--col-min), 1fr));
+  gap: var(--gap-sm);
+
+  @media (max-width: 1280px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* выбор характеристики (если понадобится) */
+.selectorRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--gap);
+  align-items: center;
+
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+  }
+}
+.selectorLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.selectorLabel {
+  font-size: 14px;
+  color: #6b7280;
+}
+.selector {
+  min-width: 260px;
+}
+.selectorRight {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 0;
+}
+.selectorHint {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* две равные колонки, авто-одна колонка на узких экранах */
+.timesRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+
+  @media (max-width: 1280px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* одиночные блоки */
+.histRow,
+.heatmapRow,
+.row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.rowDouble {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+
+  @media (max-width: 1280px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* пара блоков: слева — большие бары/пай, справа — два таймлайна/пай */
+.clusterRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap, 16px);
+  align-items: stretch;
+
+  @media (max-width: 1280px) {
+    grid-template-columns: 1fr;
+  }
+
+  .clusterLeft {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    > * {
+      height: 100%;
+    }
+  }
+
+  /* База — без жёстких рядов */
+  .clusterRight {
+    display: grid;
+    gap: var(--gap, 16px);
+    min-width: 0;
+  }
+
+  /* Модификатор: ровно две строки одинаковой высоты (нужен только там, где 2 графика) */
+  .clusterRightTwo {
+    grid-template-rows: 1fr 1fr;
+  }
+}
+
+/* тонкая настройка antd-карт внутри правой колонки */
+.clusterRight :global(.ant-card) {
+  display: flex;
+  flex-direction: column;
+}
+.clusterRight :global(.ant-card-head) {
+  padding: 10px 14px;
+}
+.clusterRight :global(.ant-card-body) {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* общее выравнивание svg/charts: убираем baseline-разрывы */
+.row svg,
+.kpis svg,
+.clusterRow svg,
+.timesRow svg,
+.heatmapRow svg {
+  display: block;
+  max-width: 100%;
+}
+
+.row {
+  width: 100%;
+
+  /* так правильно */
+  :global(.chartWrap) {
+    width: 100%;
+  }
+}
+
+.selector {
+  min-width: 260px;
+  :global(.ant-select-selector) {
+    border-radius: 8px !important;
+    padding: 4px 8px;
+  }
+}
